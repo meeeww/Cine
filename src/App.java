@@ -3,8 +3,8 @@ public class App {
         Pelicula pelicula = new Pelicula("Piratas del Caribe", 120, 18, "Nose", 15.80);
         Asiento sala = new Asiento();
 
-        sala.crearAsientos(pelicula);
-        //sala.getAsientos();
+        //sala.crearAsientos(pelicula);
+        sala.getAsientos(pelicula);
 
         Espectador alex = new Espectador("Alex", 20, 150);
         Espectador omar = new Espectador("Omar", 19, 19);
@@ -29,6 +29,6 @@ public class App {
         //System.out.println(alex.getAsiento());
         //System.out.println(omar.getAsiento());
         sala.getAsientosOcupados();
-        sala.getAsientos();
+        sala.getAsientos(pelicula);
     }
 }

@@ -4,25 +4,22 @@ public class Asiento {
     private int m_asientosMaximos;
     private int m_asientosOcupados = 0;
 
-    public void crearAsientos(Pelicula s_peli) {
+    public void getAsientos(Pelicula s_peli) {
         for (int i = 0; i < m_arrayAsientos.length; i++) {
             for (int j = 0; j < m_arrayAsientos[i].length; j++) {
-                char a = 'A';
-                a += j;
-                m_arrayAsientos[i][j] = ((i + 1) + "" + a);
-            }
-        }
-        m_asientosMaximos = m_arrayAsientos.length * m_arrayAsientos[0].length;
-        this.m_pelicula = s_peli;
-    }
+                if (m_arrayAsientos[i][j] == null) {
+                    char a = 'A';
+                    a += j;
+                    System.out.print((i + 1) + "" + a + " ");
+                } else {
+                    System.out.print(m_arrayAsientos[i][j] + " ");
+                }
 
-    public void getAsientos() {
-        for (int i = 0; i < m_arrayAsientos.length; i++) {
-            for (int j = 0; j < m_arrayAsientos[i].length; j++) {
-                System.out.print(m_arrayAsientos[i][j] + " ");
             }
             System.out.println();
         }
+        m_asientosMaximos = m_arrayAsientos.length * m_arrayAsientos[0].length;
+        this.m_pelicula = s_peli;
     }
 
     public void setAsientoIndividual(Espectador s_espectador) {
@@ -35,7 +32,7 @@ public class Asiento {
                 int fila = (int) (Math.random() * this.m_arrayAsientos.length);
                 int columna = (int) (Math.random() * this.m_arrayAsientos[fila].length);
 
-                if (m_arrayAsientos[fila][columna] != "XX") {
+                if (m_arrayAsientos[fila][columna] == null) {
                     s_espectador.setAsiento(m_arrayAsientos[fila][columna]);
                     System.out.println("Entramos con " + s_espectador.getNombre() + " en el asiento "
                             + this.m_arrayAsientos[fila][columna]);
@@ -44,19 +41,17 @@ public class Asiento {
                             + this.m_arrayAsientos[fila][columna]);
                     m_asientosOcupados = m_asientosOcupados + 1;
                 } else {
-                    while (m_arrayAsientos[fila][columna] != "XX") {
-                        int newFila = (int) (Math.random() * this.m_arrayAsientos.length);
-                        int newColumna = (int) (Math.random() * this.m_arrayAsientos[fila].length);
-                        s_espectador.setAsiento(m_arrayAsientos[newFila][newColumna]);
-                        System.out.println("Entramos con " + s_espectador.getNombre() + " en el asiento "
-                                + this.m_arrayAsientos[newFila][newColumna]);
-                        this.m_arrayAsientos[newFila][newColumna] = "XX";
-                        System.out.println("Entramos con " + s_espectador.getNombre() + " en el asiento "
-                                + this.m_arrayAsientos[newFila][newColumna]);
-                        m_asientosOcupados = m_asientosOcupados + 1;
-                        fila = newFila;
-                        columna = newColumna;
-                    }
+
+                    int newFila = (int) (Math.random() * this.m_arrayAsientos.length);
+                    int newColumna = (int) (Math.random() * this.m_arrayAsientos[fila].length);
+                    s_espectador.setAsiento(m_arrayAsientos[newFila][newColumna]);
+                    System.out.println("Entramos con " + s_espectador.getNombre() + " en el asiento "
+                            + this.m_arrayAsientos[newFila][newColumna]);
+                    this.m_arrayAsientos[newFila][newColumna] = "XX";
+                    System.out.println("Entramos con " + s_espectador.getNombre() + " en el asiento "
+                            + this.m_arrayAsientos[newFila][newColumna]);
+                    m_asientosOcupados = m_asientosOcupados + 1;
+
                 }
             } else {
                 System.out.println("El espectador no tiene suficiente dinero o la suficiente edad");
